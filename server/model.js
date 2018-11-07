@@ -19,6 +19,53 @@ module.exports = {
     });
   },
 
+  postReview: (params, callback) => {    
+    const SQLquery = `INSERT INTO Reviews
+    (bookings_id, review_date, review, accuracy, communication, cleanliness, \`location\`, \`check-in\`, \`value\`)
+    VALUES
+    (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+    db.query(SQLquery, params, (error, response) => {
+      if (error) {
+        console.error(error);
+      } else {
+        callback(response);
+      }
+    })
+  },
+
+  updateReview: (params, callback) => {
+    const SQLquery = `UPDATE Reviews
+    SET bookings_id = ?,
+        review_date = ?,
+        review = ?,
+        accuracy = ?,
+        communication = ?,
+        cleanliness = ?,
+        \`location\` = ?,
+        \`check-in\` = ?,
+        \`value\` = ?
+    WHERE r_id = ?`
+    db.query(SQLquery, params, (error, response) => {
+      if (error) {
+        console.error(error);
+      } else {
+        callback(response);
+      }
+    })
+  },
+
+  deleteReview: (reviewId, callback) => {
+    const SQLquery = `DELETE FROM Reviews
+    WHERE r_id = ?`
+    db.query(SQLquery, reviewId, (error, response) => {
+      if (error) {
+        console.error(error);
+      } else {
+        callback(response);
+      }
+    })
+  },
+
   getRatings: (listingID, callback) => {
     let SQLquery = `SELECT AVG(accuracy) AS accuracy, AVG(communication) AS communication, AVG(cleanliness) as cleanliness, AVG(\`location\`) as location, AVG(\`check-in\`) as checkin, AVG(\`value\`) as value
     FROM Reviews
@@ -55,4 +102,5 @@ module.exports = {
       }
     });
   },
+
 };
