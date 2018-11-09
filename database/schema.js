@@ -6,7 +6,8 @@ const Listing = db.define('listing', {
     type: Sequelize.INTEGER, 
     primaryKey: true,
     autoIncrement: true
-  }
+  },
+  name: Sequelize.STRING
 })
 
 const User = db.define('user', {
