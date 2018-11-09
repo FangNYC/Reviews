@@ -46,11 +46,13 @@
     "cors": "^2.8.4",
     "expo-cli": "^2.2.4",
     "express": "^4.16.4",
+    "faker": "^4.1.0",
     "knex": "^0.15.2",
     "lorem-ipsum": "^1.0.6",
     "mysql": "^2.16.0",
     "nodemon": "^1.18.4",
     "path": "^0.12.7",
+    "pg": "^7.6.1",
     "random-date-generator": "^1.0.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
@@ -61,6 +63,7 @@
     "react-ratings-declarative": "^3.4.1",
     "react-text-collapse": "^0.5.0",
     "save": "^2.3.2",
+    "sequelize": "^4.41.1",
     "styled-components": "^4.0.2"
   }
 }

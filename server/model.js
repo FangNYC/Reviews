@@ -21,7 +21,7 @@ module.exports = {
 
   postReview: (params, callback) => {    
     const SQLquery = `INSERT INTO Reviews
-    (bookings_id, review_date, review, accuracy, communication, cleanliness, \`location\`, \`check-in\`, \`value\`)
+    (bookings_id, review_date, review, accuracy, communication, cleanliness, \`location\`, \`check_in\`, \`value\`)
     VALUES
     (?, ?, ?, ?, ?, ?, ?, ?, ?)`
     db.query(SQLquery, params, (error, response) => {
@@ -42,7 +42,7 @@ module.exports = {
         communication = ?,
         cleanliness = ?,
         \`location\` = ?,
-        \`check-in\` = ?,
+        \`check_in\` = ?,
         \`value\` = ?
     WHERE r_id = ?`
     db.query(SQLquery, params, (error, response) => {
@@ -67,7 +67,7 @@ module.exports = {
   },
 
   getRatings: (listingID, callback) => {
-    let SQLquery = `SELECT AVG(accuracy) AS accuracy, AVG(communication) AS communication, AVG(cleanliness) as cleanliness, AVG(\`location\`) as location, AVG(\`check-in\`) as checkin, AVG(\`value\`) as value
+    let SQLquery = `SELECT AVG(accuracy) AS accuracy, AVG(communication) AS communication, AVG(cleanliness) as cleanliness, AVG(\`location\`) as location, AVG(\`check_in\`) as checkin, AVG(\`value\`) as value
     FROM Reviews
     INNER JOIN Bookings
     ON Reviews.bookings_id = Bookings.b_id

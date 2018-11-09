@@ -1,14 +1,14 @@
 /* REMEMBER TO DELETE DROP DATABSE FROM SCHEMA.SQL WHEN EVERYTHING IS WORKING */
-const mysql = require('mysql');
-const config = require('../config.js');
+const Sequelize = require('sequelize');
 
-const connection = mysql.createConnection(config);
-connection.connect((err) => {
-  if (err) {
-    console.error('error: ' + err.stack);
-  } else {
-    console.log('connected: ' + connection.threadId);
-  }
-});
+const db = new Sequelize('postgres://maria:0237100t@localhost:5432/staybnb1');
+db
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 
-module.exports = connection;
+module.exports = db;
