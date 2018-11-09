@@ -1,4 +1,4 @@
-USE staybnb
+\c staybnb
 
 insert into Listings (l_id) values (001);
 insert into Listings (l_id) values (002);
