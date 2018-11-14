@@ -1,7 +1,8 @@
 /* REMEMBER TO DELETE DROP DATABSE FROM SCHEMA.SQL WHEN EVERYTHING IS WORKING */
 const Sequelize = require('sequelize');
+const config = require('../../config.js');
 
-const db = new Sequelize('postgres://maria:0237100t@localhost:5432/staybnb1');
+const db = new Sequelize(`postgres://maria:${config.password}@localhost:5432/${config.database}`);
 db
   .authenticate()
   .then(() => {

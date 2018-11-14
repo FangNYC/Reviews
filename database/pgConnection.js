@@ -1,4 +1,4 @@
-// Testing out Knex - not fully set up yet
+// Initial draft set up of knex // not yet set up
 
 var knex = require('knex')({
   client: 'pg',
