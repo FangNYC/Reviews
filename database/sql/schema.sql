@@ -15,7 +15,7 @@ CREATE UNLOGGED TABLE Listings (
 
 -- ALTER TABLE listings SET UNLOGGED;
 
-COPY listings (description) FROM '/Users/maria/Documents/HR/Week8/Reviews/database/listings.csv';
+COPY listings (description) FROM '/Users/maria/Documents/HR/Reviews/listings.csv';
 
 CREATE UNLOGGED TABLE Users (
   u_id serial NOT NULL,
@@ -26,7 +26,7 @@ CREATE UNLOGGED TABLE Users (
   PRIMARY KEY (u_id)
 );
 
-COPY users (username, display_name, photo_url, profile_url) FROM '/Users/maria/Documents/HR/Week8/Reviews/database/users.csv' DELIMITERS ',' CSV;
+COPY users (username, display_name, photo_url, profile_url) FROM '/Users/maria/Documents/HR/Reviews/users.csv' DELIMITERS ',' CSV;
 
 CREATE UNLOGGED TABLE Bookings (
   b_id serial NOT NULL,
@@ -39,7 +39,7 @@ CREATE UNLOGGED TABLE Bookings (
   FOREIGN KEY (users_id) REFERENCES Users(u_id)
 );
 
-COPY bookings (listings_id, users_id, stay_start, stay_end) FROM '/Users/maria/Documents/HR/Week8/Reviews/database/bookings.csv' DELIMITERS ',' CSV;
+COPY bookings (listings_id, users_id, stay_start, stay_end) FROM '/Users/maria/Documents/HR/Reviews/bookings.csv' DELIMITERS ',' CSV;
 
 CREATE UNLOGGED TABLE Reviews (
   r_id serial NOT NULL,
@@ -56,4 +56,12 @@ CREATE UNLOGGED TABLE Reviews (
   FOREIGN KEY (bookings_id) REFERENCES Bookings(b_id)
 );
 
-COPY reviews (bookings_id, review_date, review, accuracy, communication, cleanliness, location, check_in, value) FROM '/Users/maria/Documents/HR/Week8/Reviews/database/reviews.csv' DELIMITERS ',' CSV;
+COPY reviews (bookings_id, review_date, review, accuracy, communication, cleanliness, location, check_in, value) FROM '/Users/maria/Documents/HR/Reviews/reviews.csv' DELIMITERS ',' CSV;
+
+users.photo_url, users.display_name, 
+
+SELECT reviews.review, reviews.review_date, 
+    FROM (SELECT * FROM Bookings where bookings.listings_id = 91) AS b
+    INNER JOIN Reviews
+    ON b.b_id = Reviews.bookings_id
+    ORDER BY Reviews.review_date DESC;

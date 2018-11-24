@@ -2,8 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
+const newRelic = require('newrelic');
 
-const db = require('../database/index.js');
+
+// const db = require('../database/nosql/index.js');
 const router = require('./router.js');
 
 const app = express();

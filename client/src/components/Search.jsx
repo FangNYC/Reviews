@@ -29,7 +29,7 @@ export default class Search extends React.Component {
   starsLoaded(ratings) {
     let sum = 0;
     for (var key in ratings[0]) {
-      sum += ratings[0][key]
+      sum += Number(ratings[0][key])
     }
     let avg = sum / 6;
     this.setState({
@@ -62,7 +62,7 @@ export default class Search extends React.Component {
     return (
       <div className="searchContainer">
         <span className="totalReviewsDiv">
-          <h2>{this.state.ratingsLoaded ? this.state.totalRatings : 0} Reviews<StarsModel rating={this.state.starsLoaded ? this.state.avgRating : 0} dimensions='25px'/></h2>
+          <h2>{this.state.ratingsLoaded ? this.state.totalRatings : 0} Reviews <StarsModel rating={this.state.starsLoaded ? this.state.avgRating : 0} dimensions='25px'/></h2>
         </span>
         <span className="searchBarDiv">
           <img src="http://imgur.com/npblqeD.png" className="magnifyImg"/>
