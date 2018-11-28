@@ -14,7 +14,7 @@ module.exports = {
     rules: [
       {
         // File extension we are looking for
-        test: /\.jsx?/,
+        test: /\.js/,
         include: SRC_DIR,
         loader: 'babel-loader',
         query: {
@@ -22,5 +22,8 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+
+  devtool: 'inline-source-map'
+  
 }

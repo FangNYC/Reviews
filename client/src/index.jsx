@@ -37,7 +37,6 @@ export default class Reviews extends React.Component {
     axios
       .get("/reviews", params)
       .then(({ data }) => {
-        console.log(data)
         this.setState({
           reviews: data
         });
@@ -112,4 +111,4 @@ export default class Reviews extends React.Component {
   }
 }
 
-ReactDOM.render(<Reviews />, document.getElementById("reviews"));
+// ReactDOM.render(<Reviews />, document.getElementById("reviews"));

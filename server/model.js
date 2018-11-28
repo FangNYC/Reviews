@@ -10,10 +10,11 @@ module.exports = {
       "users.display_name",
       "reviews.review_date"
     )
-      .from("reviews")
-      .innerJoin("bookings", "reviews.bookings_id", "bookings.b_id")
+      .from("bookings")
+      .leftJoin("reviews", "reviews.bookings_id", "bookings.b_id")
       .leftJoin("users", "bookings.users_id", "users.u_id")
       .where("bookings.listings_id", listingID)
+      .whereNotNull("reviews.review_description")
       .orderBy("reviews.review_date", "desc")
       .then(res => {
         callback(res);
@@ -24,15 +25,15 @@ module.exports = {
   },
 
   postReview: (params, callback) => {
-    const SQLquery = `INSERT INTO Reviews
-    (bookings_id, review_date, review, accuracy, communication, cleanliness, \`location\`, \`check_in\`, \`value\`)
-    VALUES
-    (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    // const SQLquery = `INSERT INTO Reviews
+    // (bookings_id, review_date, review, accuracy, communication, cleanliness, \`location\`, \`check_in\`, \`value\`)
+    // VALUES
+    // (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     db("reviews")
       .insert({
         bookings_id: params[0],
         review_date: params[1],
-        review: params[2],
+        review_description: params[2],
         accuracy: params[3],
         communication: params[4],
         cleanliness: params[5],
@@ -63,7 +64,7 @@ module.exports = {
     db("reviews")
       .where("r_id", "=", params[0])
       .update({
-        review: params[1],
+        review_description: params[1],
         accuracy: params[2],
         communication: params[3],
         cleanliness: params[4],
@@ -113,7 +114,7 @@ module.exports = {
       .avg({ location: "location" })
       .avg({ check_in: "check_in" })
       .avg({ value: "value" })
-      .innerJoin("reviews", "reviews.bookings_id", "bookings.b_id")
+      .leftJoin("reviews", "reviews.bookings_id", "bookings.b_id")
       .leftJoin("users", "bookings.users_id", "users.u_id")
       .where("bookings.listings_id", listingID)
       .then(res => {
@@ -128,9 +129,9 @@ module.exports = {
       "users.display_name",
       "reviews.review_date"
     )
-      .from("bookings")
+      .from("reviews")
       .where("bookings.listings_id", listingID)
-      .innerJoin("reviews", "reviews.bookings_id", "bookings.b_id")
+      .leftJoin("bookings", "reviews.bookings_id", "bookings.b_id")
       .where("reviews.review_description", "like", query)
       .leftJoin("users", "bookings.users_id", "users.u_id")
       .orderBy("reviews.review_date", "desc")

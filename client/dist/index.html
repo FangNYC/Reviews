@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Reviews</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-</head>
-<body>
-<div id="reviews"></div>
-<script type="text/javascript" src="bundle.js"></script>
-</body>
+  <head>
+    <title>Reviews</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="reviews"></div>
+    <script src="bundle.js"></script>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- <script src="http://localhost:7000/app.js"></script> -->
+    <script>ReactDOM.hydrate(React.createElement(Reviews), document.getElementById('reviews'))</script>
+  </body>
 </html>
