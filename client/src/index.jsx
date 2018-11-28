@@ -1,10 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import axios from 'axios';
+import React from "react";
+import ReactDOM from "react-dom";
+import axios from "axios";
 
-import Search from './components/Search.jsx';
-import Stars from './components/Stars.jsx';
-import ReviewList from './components/ReviewList.jsx';
+import Search from "./components/Search.jsx";
+import Stars from "./components/Stars.jsx";
+import ReviewList from "./components/ReviewList.jsx";
 
 export default class Reviews extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ export default class Reviews extends React.Component {
       search: [],
       ratings: [],
       showSearch: false
-    }
+    };
     this.getAllReviews = this.getAllReviews.bind(this);
     this.searchReviews = this.searchReviews.bind(this);
     this.getRatings = this.getRatings.bind(this);
@@ -27,27 +27,29 @@ export default class Reviews extends React.Component {
 
   getAllReviews() {
     let queryString = window.location.search;
-    let listingID = (queryString.slice(-3) * 1);
+    let listingID = queryString.slice(4);
     let params = {
       params: {
         id: listingID
       }
     };
 
-    axios.get('/reviews', params)
-    .then((result) => {
-      this.setState({
-        reviews: result.data
+    axios
+      .get("/reviews", params)
+      .then(({ data }) => {
+        console.log(data)
+        this.setState({
+          reviews: data
+        });
+      })
+      .catch(error => {
+        console.error(error);
       });
-    }) 
-    .catch((error) => {
-      console.error(error);
-    })
   }
 
   searchReviews(query) {
     let queryString = window.location.search;
-    let listingID = (queryString.slice(-3) * 1);
+    let listingID = queryString.slice(4);
     let params = {
       params: {
         id: listingID,
@@ -55,49 +57,59 @@ export default class Reviews extends React.Component {
       }
     };
 
-    axios.get('/search', params)
-      .then((result) => {
+    axios
+      .get("/search", params)
+      .then(({ data }) => {
         this.setState({
-          search: result.data,
+          search: data,
           showSearch: true
         });
       })
-      .catch((error) => {
+      .catch(error => {
         console.error(error);
-      })
+      });
   }
 
   getRatings() {
     let queryString = window.location.search;
-    let listingID = (queryString.slice(-3) * 1);
+    let listingID = queryString.slice(4);
     let params = {
       params: {
-        id: listingID,
+        id: listingID
       }
     };
-    
-    axios.get('/ratings', params)
-    .then((result) => {
-      if (result.data[0].accuracy !== null) {
-        this.setState({
-          ratings: result.data
-        });
-      }
-    }) 
-    .catch((error) => {
-      console.error(error);
-    })
+
+    axios
+      .get("/ratings", params)
+      .then(({ data }) => {
+        if (data[0].accuracy !== null) {
+          this.setState({
+            ratings: data
+          });
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   render() {
     return (
       <div>
-        <Search searchReviews={this.searchReviews} ratings={this.state.ratings} reviews={this.state.reviews}/>
-        <Stars ratings={this.state.ratings}/>
-        <ReviewList reviews={this.state.showSearch ? this.state.search : this.state.reviews}/>
+        <Search
+          searchReviews={this.searchReviews}
+          ratings={this.state.ratings}
+          reviews={this.state.reviews}
+        />
+        <Stars ratings={this.state.ratings} />
+        <ReviewList
+          reviews={
+            this.state.showSearch ? this.state.search : this.state.reviews
+          }
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 ReactDOM.render(<Reviews />, document.getElementById("reviews"));
