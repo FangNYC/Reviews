@@ -18,7 +18,7 @@ module.exports = {
     params = [
       req.body.bookings_id,
       req.body.review_date,
-      req.body.review,
+      req.body.review_description,
       req.body.accuracy,
       req.body.communication,
       req.body.cleanliness,
