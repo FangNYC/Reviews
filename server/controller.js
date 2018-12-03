@@ -63,5 +63,9 @@ module.exports = {
     search(req.query.id, req.query.query, response => {
       res.send(response);
     });
+  },
+
+  getLoader: (req, res) => {
+    res.send('loaderio-acb2085fbf0ec76c82d63f5ff0aa05cf');
   }
 };

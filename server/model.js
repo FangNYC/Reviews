@@ -1,9 +1,11 @@
 const db = require("../database/sql/knexConnection.js");
 
 module.exports = {
+
   getAllReviews: (listingID, callback) => {
     // const SQLquery = `SELECT r.review_description, u.u_id, u.photo_url, u.display_name, r.review_date FROM bookings b INNER JOIN reviews r ON r.bookings_id = b.b_id AND b.listings_id = 91
     // RIGHT JOIN users u ON b.users_id = u.u_id`;
+    // select r.review_description, u.photo_url, u.display_name, r.review_date from bookings b left join reviews r on r.bookings_id = b.b_id left join users u on b.users_id = u.u_id where b.listings_id = 1;
     db.select(
       "reviews.review_description",
       "users.photo_url",

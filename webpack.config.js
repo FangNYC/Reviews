@@ -10,6 +10,10 @@ module.exports = {
     filename: 'bundle.js',
     path: DIST_DIR
   },
+  node: {
+    __dirname: false,
+    __filename: false,
+  },
   module: {
     rules: [
       {
@@ -23,7 +27,5 @@ module.exports = {
       }
     ]
   },
-
-  devtool: 'inline-source-map'
-  
+  devtool: 'inline-source-map',
 }

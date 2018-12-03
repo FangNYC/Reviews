@@ -3,6 +3,7 @@ const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   entry: './server/index.js',
+  // entry: './server/babelServer.js',
   target: 'node',
 
   externals: [nodeExternals()],
@@ -11,7 +12,10 @@ module.exports = {
     path: path.resolve('server-build'),
     filename: 'index.js'
   },
-
+  node: {
+    __dirname: false, 
+    __filename: false,
+  },
   module: {
     rules: [
       {
