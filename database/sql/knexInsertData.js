@@ -8,9 +8,9 @@ async function all() {
 }
 
 async function doAll() {
-  var listing = await listings();
-  var user = await users();
-  var booking = await bookings();
+  // var listing = await listings();
+  // var user = await users();
+  // var booking = await bookings();
   var review = await reviews();
 }
 
