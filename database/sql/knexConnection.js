@@ -4,7 +4,7 @@ const pg = require('pg');
 var knex = require('knex')({
   client: 'pg',
   connection: {
-    host     : '3.16.27.159',
+    host     : 'ec2-18-223-209-234.us-east-2.compute.amazonaws.com',
     user     : 'postgres',
     password : '0237100t',  
     database : 'staybnb_knex',
