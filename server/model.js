@@ -3,8 +3,6 @@ const db = require("../database/sql/knexConnection.js");
 module.exports = {
 
   getAllReviews: (listingID, callback) => {
-    // const SQLquery = `SELECT r.review_description, u.u_id, u.photo_url, u.display_name, r.review_date FROM bookings b INNER JOIN reviews r ON r.bookings_id = b.b_id AND b.listings_id = 91
-    // RIGHT JOIN users u ON b.users_id = u.u_id`;
     // select r.review_description, u.photo_url, u.display_name, r.review_date from bookings b left join reviews r on r.bookings_id = b.b_id left join users u on b.users_id = u.u_id where b.listings_id = 1;
     db.select(
       "reviews.review_description",
@@ -27,10 +25,6 @@ module.exports = {
   },
 
   postReview: (params, callback) => {
-    // const SQLquery = `INSERT INTO Reviews
-    // (bookings_id, review_date, review, accuracy, communication, cleanliness, \`location\`, \`check_in\`, \`value\`)
-    // VALUES
-    // (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     db("reviews")
       .insert({
         bookings_id: params[0],
@@ -52,17 +46,6 @@ module.exports = {
   },
 
   updateReview: (params, callback) => {
-    const SQLquery = `UPDATE Reviews
-    SET bookings_id = ?,
-        review_date = ?,
-        review = ?,
-        accuracy = ?,
-        communication = ?,
-        cleanliness = ?,
-        \`location\` = ?,
-        \`check_in\` = ?,
-        \`value\` = ?
-    WHERE r_id = ?`;
     db("reviews")
       .where("r_id", "=", params[0])
       .update({
@@ -95,32 +78,19 @@ module.exports = {
   },
 
   getRatings: (listingID, callback) => {
-    // let SQLquery = `SELECT AVG(accuracy) AS accuracy, AVG(communication) AS communication, AVG(cleanliness) as cleanliness, AVG(\`location\`) as location, AVG(\`check_in\`) as checkin, AVG(\`value\`) as value
-    // FROM Reviews
-    // INNER JOIN Bookings
-    // ON Reviews.bookings_id = Bookings.b_id
-    // LEFT JOIN Users
-    // ON Bookings.users_id = Users.u_id
-    // WHERE Bookings.listings_id = ${listingID};`;
-    // db.query(SQLquery, (error, response) => {
-    //   if (error) {
-    //     console.error(error);
-    //   } else {
-    //     callback(response);
-    //   }
-    // });
-    db("bookings")
-      .avg({ accuracy: "accuracy" })
-      .avg({ communication: "communication" })
-      .avg({ cleanliness: "cleanliness" })
-      .avg({ location: "location" })
-      .avg({ check_in: "check_in" })
-      .avg({ value: "value" })
-      .leftJoin("reviews", "reviews.bookings_id", "bookings.b_id")
-      .leftJoin("users", "bookings.users_id", "users.u_id")
-      .where("bookings.listings_id", listingID)
+    // db("bookings")
+    db.raw(`select avg(accuracy) as accuracy, avg(communication) as communication, avg(cleanliness) as cleanliness, avg(location) as location, avg(check_in) as check_in, avg(value) as value from bookings left join reviews on reviews.bookings_id = bookings.b_id left join users on bookings.users_id = users.u_id where bookings.listings_id = ${listingID}`)
+      // .avg({ accuracy: "accuracy" })
+      // .avg({ communication: "communication" })
+      // .avg({ cleanliness: "cleanliness" })
+      // .avg({ location: "location" })
+      // .avg({ check_in: "check_in" })
+      // .avg({ value: "value" })
+      // .leftJoin("reviews", "reviews.bookings_id", "bookings.b_id")
+      // .leftJoin("users", "bookings.users_id", "users.u_id")
+      // .where("bookings.listings_id", listingID)
       .then(res => {
-        callback(res);
+        callback(res.rows);
       });
   },
 

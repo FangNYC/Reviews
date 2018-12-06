@@ -23,16 +23,19 @@ const knex = require('./knexConnection.js');
     table.increments('b_id');
     table.integer('listings_id');
     table.foreign('listings_id').references('listings.l_id');
+    table.index('listings_id', 'bookings_listings_index');
     table.integer('users_id');
     table.foreign('users_id').references('users.u_id');
+    table.index('users_id', 'bookings_users_index');
     table.string('stay_start');
-    table.string('stay_end');
+    table.string('stay_end'); 
   })
 
   await knex.schema.createTable('reviews', (table) => {
     table.increments('r_id');
     table.integer('bookings_id');
     table.foreign('bookings_id').references('bookings.b_id');
+    table.index('bookings_id', 'reviews_bookings_index');
     table.string('review_date');
     table.string('review_description', 1000);
     table.integer('accuracy');
