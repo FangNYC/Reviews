@@ -4,12 +4,11 @@ const pg = require('pg');
 var knex = require('knex')({
   client: 'pg',
   connection: {
-    host     : 'ec2-18-223-209-234.us-east-2.compute.amazonaws.com',
+    host     : 'ec2-18-224-56-58.us-east-2.compute.amazonaws.com',
     user     : 'postgres',
     password : '0237100t',  
     database : 'staybnb_knex',
   }
-  // connection: 'postgres://10.380:5432'
 });
 
 module.exports = knex;

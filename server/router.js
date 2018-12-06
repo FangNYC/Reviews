@@ -17,7 +17,7 @@ router.get('/search', controller.search);
 router.post('/reviews', controller.postReview);
 router.put('/reviews', controller.updateReview);
 router.delete('/reviews', controller.deleteReview);
-router.get('/loaderio-acb2085fbf0ec76c82d63f5ff0aa05cf', controller.getLoader)
+router.get('/loaderio*', controller.getLoader)
 
 const source = path.join(__dirname, '../client/dist/index.html');
 

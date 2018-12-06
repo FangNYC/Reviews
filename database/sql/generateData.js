@@ -55,6 +55,7 @@ module.exports.createBookings = () => {
   return bookingArray;
 };
 
+let bookingCount = 1;
 module.exports.createReviews = () => {
   let reviewArray = [];
   for (var i = 0; i < 1000; i++) {
@@ -65,7 +66,7 @@ module.exports.createReviews = () => {
     let shortRandomDate = stringRandomDate.slice(1, 11);
 
     reviewArray.push({
-      bookings_id: Math.ceil(Math.random() * 10000000),
+      bookings_id: bookingCount++,
       review_date: shortRandomDate,
       review_description: faker.lorem.paragraph(),
       accuracy: Math.ceil(Math.random() * 5),

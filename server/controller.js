@@ -66,6 +66,6 @@ module.exports = {
   },
 
   getLoader: (req, res) => {
-    res.send('loaderio-acb2085fbf0ec76c82d63f5ff0aa05cf');
+    res.send('loaderio-250f1ae91d40811d73dc9120f18b0db5');
   }
 };

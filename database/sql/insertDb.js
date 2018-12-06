@@ -134,4 +134,3 @@ const reviewStream = fs.createWriteStream('./data/reviews1.csv');
 
     await Promise.all([listingPromise, userPromise, bookingPromise, reviewPromise])
 })();
-// const used = process.memoryUsage().heapUsed / 1024 / 1024;
