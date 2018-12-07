@@ -5,13 +5,14 @@ import Reviews from '../client/src/index.jsx';
 import express from 'express';
 import path from 'path';
 import controller from './controller.js';
+
 // const express = require('express');
 // const path = require('path');
 // const controller = require('./controller.js');
 
 const router = express.Router();
 
-router.get('/reviews', controller.getAllReviews);
+router.get('/reviews', controller.cache, controller.getAllReviews);
 router.get('/ratings', controller.getRatings);
 router.get('/search', controller.search);
 router.post('/reviews', controller.postReview);

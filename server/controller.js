@@ -6,10 +6,18 @@ const {
   getRatings,
   search
 } = require("./model.js");
+const Promise = require("bluebird");
+const redis = require("redis");
+const client = redis.createClient();
+
+Promise.promisifyAll(redis.RedisClient.prototype);
+Promise.promisifyAll(redis.Multi.prototype);
 
 module.exports = {
   getAllReviews: (req, res) => {
-    getAllReviews(req.query.id, response => {
+    const id = req.query.id;
+    getAllReviews(id, response => {
+      client.set(id, JSON.stringify(response), redis.print);
       res.send(response);
     });
   },
@@ -66,6 +74,21 @@ module.exports = {
   },
 
   getLoader: (req, res) => {
-    res.send('loaderio-250f1ae91d40811d73dc9120f18b0db5');
+    res.send("loaderio-250f1ae91d40811d73dc9120f18b0db5");
+  },
+
+  cache: (req, res, next) => {
+    return client
+      .getAsync(req.query.id)
+      .then(data => {
+        if (data != null) {
+          res.send(JSON.parse(data));
+        } else {
+          next();
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 };

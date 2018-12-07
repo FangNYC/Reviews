@@ -15,7 +15,7 @@ import path from "path";
 // const router = require('./router.js');
 
 const app = express();
-const source = path.join(__dirname, '../client/dist/');
+const source = path.join(__dirname, "../client/dist/");
 
 app.use(bodyParser.json());
 app.use(express.static(source));
