@@ -2,7 +2,7 @@
 
 The Reviews module displays reviews and ratings for a specific accommodation listing. Below is a preview of the deployed service.
 
-![](https://github.com/FangNYC/blob/master/reviews.gif)
+![](https://github.com/FangNYC/Reviews/blob/master/reviews.gif)
 
 ## Related Projects
 
@@ -61,7 +61,7 @@ Retrieve reviews and ratings for a listing.
 id: integer
 ```
 
-### GET response example (application/json)
+#### GET response example (application/json)
 
 ```text
 [
@@ -135,7 +135,7 @@ Example of request body
 }
 ```
 
-### POST response example (application/json)
+#### POST response example (application/json)
 
 ```json
 {
@@ -144,6 +144,8 @@ Example of request body
 ```
 
 ### PUT /reviews
+
+Update existing review and ratings for a listing.
 
 ```sh
 # query string
@@ -174,7 +176,7 @@ Example of request body
 }
 ```
 
-### PUT response example (application/json)
+#### PUT response example (application/json)
 
 ```json
 {
@@ -182,14 +184,16 @@ Example of request body
 }
 ```
 
-### DELETE /ratings
+### DELETE /reviews
+
+Remove a review for a listing.
 
 ```sh
 # query string
 id: integer
 ```
 
-### DELETE response example (application/json)
+#### DELETE response example (application/json)
 
 ```json
 {
@@ -199,4 +203,4 @@ id: integer
 
 ## Data Schema
 
-![](https://github.com/FangNYC/blob/master/dataSchema.png)
+![](https://github.com/FangNYC/Reviews/blob/master/dataSchema.png)
