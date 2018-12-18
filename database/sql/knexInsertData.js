@@ -27,12 +27,12 @@ async function listings() {
           })
           .catch(err => {
             console.error(err);
-          })
+          });
       }
-      resolve()
+      resolve();
       console.timeEnd("listingWrite");
     })();
-  })
+  });
 }
 
 async function users() {

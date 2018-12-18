@@ -4,9 +4,7 @@ export default class ReviewItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      truncate: false,
-      // shortText: this.props.review.review_description.substring(0, 280) + "...",
-      // reviewText: this.props.review.review_description
+      truncate: false
     };
     this.clickHandler = this.clickHandler.bind(this);
     this.showAlert = this.showAlert.bind(this);
@@ -53,6 +51,7 @@ export default class ReviewItem extends React.Component {
         <div>{this.props.review.review_description}</div>
       );
 
+    // refactored legacy code so that dates are in the format of month-year
     const monthNames = [
       "January",
       "February",
@@ -76,10 +75,7 @@ export default class ReviewItem extends React.Component {
       <div className="reviewItemContainer">
         <div className="reviewItemHeader">
           <span className="reviewItemHeaderPhotoSpan">
-            <img
-              src={newSrc}
-              className="reviewItemHeaderPhoto"
-            />
+            <img src={newSrc} className="reviewItemHeaderPhoto" />
           </span>
           <span className="reviewItemHeaderInfo">
             {this.props.review.display_name} <br />

@@ -18,7 +18,7 @@ module.exports = {
     const id = req.query.id;
     getAllReviews(id, response => {
       client.set(id, JSON.stringify(response), redis.print);
-      res.send(response);
+      res.status(200).send(response);
     });
   },
 
@@ -35,7 +35,7 @@ module.exports = {
       req.body.value
     ];
     postReview(params, response => {
-      res.send("Review is posted!");
+      res.status(201).send(response);
     });
   },
 
@@ -51,25 +51,25 @@ module.exports = {
       req.body.value
     ];
     updateReview(params, response => {
-      res.send("Review is updated!");
+      res.status(200).send(response);
     });
   },
 
   deleteReview: (req, res) => {
     deleteReview(req.query.id, response => {
-      res.send("Review is deleted!");
+      res.status(200).send(response);
     });
   },
 
   getRatings: (req, res) => {
     getRatings(req.query.id, response => {
-      res.send(response);
+      res.status(200).send(response);
     });
   },
 
   search: (req, res) => {
     search(req.query.id, req.query.query, response => {
-      res.send(response);
+      res.status(200).send(response);
     });
   },
 
@@ -82,13 +82,13 @@ module.exports = {
       .getAsync(req.query.id)
       .then(data => {
         if (data != null) {
-          res.send(JSON.parse(data));
+          res.status(200).send(JSON.parse(data));
         } else {
           next();
         }
       })
       .catch(err => {
-        console.error(err);
+        res.status(500).send(err);
       });
   }
 };

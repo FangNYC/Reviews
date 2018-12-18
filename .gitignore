@@ -9,3 +9,5 @@ Notes
 .eslintrc.js
 package-lock.json
 *.csv
+test/newrelic.js
+database/sql/dbConfig.js

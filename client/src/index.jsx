@@ -1,7 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import axios from "axios";
-
 import Search from "./components/Search.jsx";
 import Stars from "./components/Stars.jsx";
 import ReviewList from "./components/ReviewList.jsx";

@@ -30,7 +30,6 @@ module.exports.createBookings = () => {
     let startDate = new Date(2014, 1, 1);
     let endDate = new Date(2018, 12, 31);
     let days = Math.ceil(Math.random() * 7);
-    // define random start and end dates for the stay
     let randomStartDate = DateGenerator.getRandomDateInRange(
       startDate,
       endDate

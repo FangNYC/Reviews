@@ -1,3 +1,5 @@
+-- Inherited legacy code - creating database and tables using raw SQL
+
 -- DROP DATABASE IF EXISTS staybnb;
 -- CREATE DATABASE staybnb;
 \c staybnb;
