@@ -1,3 +1,5 @@
+-- Inherited legacy code - creating data using raw SQL
+
 \c staybnb
 
 insert into Listings (l_id) values (001);

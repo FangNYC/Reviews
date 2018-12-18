@@ -1,14 +1,3 @@
-import Reviews from './index.jsx';
-
-// export default Reviews;
-// function container(props) {
-//   return (
-//     <div>
-//       <Reviews />
-//     </div>
-//   )
-// }
-
-// window.Reviews = container;
+import Reviews from "./index.jsx";
 
 window.Reviews = Reviews;

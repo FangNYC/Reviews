@@ -4,14 +4,14 @@
   "description": "Reviews module for Staybnb \"item description page\"",
   "main": "index.js",
   "scripts": {
-    "server-dev": "nodemon server/index.js",
-    "react-dev": "webpack -d --watch",
-    "seed": "mysql -u stacykim -p --host=staybnb.c1bo9omfdnqb.us-east-2.rds.amazonaws.com stacykim",
     "start-aws": "pm2 start server/index.js",
     "listpm2": "pm2 list",
     "pm2server": "pm2 show server",
     "pm2stop": "pm2 stop 0",
-    "connect": "chmod 400 meow.pem && ssh -i \"meow.pem\" ubuntu@ec2-18-218-27-164.us-east-2.compute.amazonaws.com"
+    "connect": "chmod 400 meow.pem && ssh -i \"meow.pem\" ubuntu@ec2-18-218-27-164.us-east-2.compute.amazonaws.com",
+    "dev:build-server": "NODE_ENV=development webpack --config webpack.server.js --mode=development -w",
+    "dev:start": "nodemon ./server-build/index.js",
+    "seed": "node ./database/sql/knexInsertData.js"
   },
   "repository": {
     "type": "git",
@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
     "bookshelf": "^0.13.3",
     "cors": "^2.8.4",
@@ -62,8 +63,10 @@
     "react-native-cli": "^2.0.1",
     "react-ratings-declarative": "^3.4.1",
     "react-text-collapse": "^0.5.0",
+    "redis": "^2.8.0",
     "save": "^2.3.2",
     "sequelize": "^4.41.1",
-    "styled-components": "^4.0.2"
+    "styled-components": "^4.0.2",
+    "webpack-node-externals": "^1.7.2"
   }
 }

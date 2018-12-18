@@ -1,9 +1,8 @@
 const db = require("../database/sql/knexConnection.js");
 
 module.exports = {
-
   getAllReviews: (listingID, callback) => {
-    // select r.review_description, u.photo_url, u.display_name, r.review_date from bookings b left join reviews r on r.bookings_id = b.b_id left join users u on b.users_id = u.u_id where b.listings_id = 1;
+    // test query in database console: select r.review_description, u.photo_url, u.display_name, r.review_date from bookings b left join reviews r on r.bookings_id = b.b_id left join users u on b.users_id = u.u_id where b.listings_id = 1;
     db.select(
       "reviews.review_description",
       "users.photo_url",
@@ -78,19 +77,18 @@ module.exports = {
   },
 
   getRatings: (listingID, callback) => {
-    // db("bookings")
-    db.raw(`select avg(accuracy) as accuracy, avg(communication) as communication, avg(cleanliness) as cleanliness, avg(location) as location, avg(check_in) as check_in, avg(value) as value from bookings left join reviews on reviews.bookings_id = bookings.b_id left join users on bookings.users_id = users.u_id where bookings.listings_id = ${listingID}`)
-      // .avg({ accuracy: "accuracy" })
-      // .avg({ communication: "communication" })
-      // .avg({ cleanliness: "cleanliness" })
-      // .avg({ location: "location" })
-      // .avg({ check_in: "check_in" })
-      // .avg({ value: "value" })
-      // .leftJoin("reviews", "reviews.bookings_id", "bookings.b_id")
-      // .leftJoin("users", "bookings.users_id", "users.u_id")
-      // .where("bookings.listings_id", listingID)
+    db("bookings")
+      .avg({ accuracy: "accuracy" })
+      .avg({ communication: "communication" })
+      .avg({ cleanliness: "cleanliness" })
+      .avg({ location: "location" })
+      .avg({ check_in: "check_in" })
+      .avg({ value: "value" })
+      .leftJoin("reviews", "reviews.bookings_id", "bookings.b_id")
+      .leftJoin("users", "bookings.users_id", "users.u_id")
+      .where("bookings.listings_id", listingID)
       .then(res => {
-        callback(res.rows);
+        callback(res);
       });
   },
 

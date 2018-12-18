@@ -6,11 +6,19 @@ const {
   getRatings,
   search
 } = require("./model.js");
+const Promise = require("bluebird");
+const redis = require("redis");
+const client = redis.createClient();
+
+Promise.promisifyAll(redis.RedisClient.prototype);
+Promise.promisifyAll(redis.Multi.prototype);
 
 module.exports = {
   getAllReviews: (req, res) => {
-    getAllReviews(req.query.id, response => {
-      res.send(response);
+    const id = req.query.id;
+    getAllReviews(id, response => {
+      client.set(id, JSON.stringify(response), redis.print);
+      res.status(200).send(response);
     });
   },
 
@@ -27,7 +35,7 @@ module.exports = {
       req.body.value
     ];
     postReview(params, response => {
-      res.send("Review is posted!");
+      res.status(201).send(response);
     });
   },
 
@@ -43,29 +51,44 @@ module.exports = {
       req.body.value
     ];
     updateReview(params, response => {
-      res.send("Review is updated!");
+      res.status(200).send(response);
     });
   },
 
   deleteReview: (req, res) => {
     deleteReview(req.query.id, response => {
-      res.send("Review is deleted!");
+      res.status(200).send(response);
     });
   },
 
   getRatings: (req, res) => {
     getRatings(req.query.id, response => {
-      res.send(response);
+      res.status(200).send(response);
     });
   },
 
   search: (req, res) => {
     search(req.query.id, req.query.query, response => {
-      res.send(response);
+      res.status(200).send(response);
     });
   },
 
   getLoader: (req, res) => {
-    res.send('loaderio-250f1ae91d40811d73dc9120f18b0db5');
+    res.send("loaderio-250f1ae91d40811d73dc9120f18b0db5");
+  },
+
+  cache: (req, res, next) => {
+    return client
+      .getAsync(req.query.id)
+      .then(data => {
+        if (data != null) {
+          res.status(200).send(JSON.parse(data));
+        } else {
+          next();
+        }
+      })
+      .catch(err => {
+        res.status(500).send(err);
+      });
   }
 };

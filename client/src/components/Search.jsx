@@ -1,16 +1,16 @@
-import React from 'react';
-import StarsModel from './StarsModel.jsx';
+import React from "react";
+import StarsModel from "./StarsModel.jsx";
 
 export default class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: '',
+      query: "",
       starsLoaded: false,
       avgRating: 0,
       ratingsLoaded: false,
       totalRatings: 0
-    }
+    };
     this.searchQuery = this.searchQuery.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.starsLoaded = this.starsLoaded.bind(this);
@@ -29,7 +29,7 @@ export default class Search extends React.Component {
   starsLoaded(ratings) {
     let sum = 0;
     for (var key in ratings[0]) {
-      sum += Number(ratings[0][key])
+      sum += Number(ratings[0][key]);
     }
     let avg = sum / 6;
     this.setState({
@@ -48,13 +48,13 @@ export default class Search extends React.Component {
   searchQuery(event) {
     this.setState({
       query: event.target.value
-    })
+    });
   }
 
   handleKeyPress(event) {
-    if (event.key == 'Enter') {
+    if (event.key == "Enter") {
       event.preventDefault();
-      this.props.searchReviews(this.state.query)
+      this.props.searchReviews(this.state.query);
     }
   }
 
@@ -62,10 +62,16 @@ export default class Search extends React.Component {
     return (
       <div className="searchContainer">
         <span className="totalReviewsDiv">
-          <h2>{this.state.ratingsLoaded ? this.state.totalRatings : 0} Reviews <StarsModel rating={this.state.starsLoaded ? this.state.avgRating : 0} dimensions='25px'/></h2>
+          <h2>
+            {this.state.ratingsLoaded ? this.state.totalRatings : 0} Reviews{" "}
+            <StarsModel
+              rating={this.state.starsLoaded ? this.state.avgRating : 0}
+              dimensions="25px"
+            />
+          </h2>
         </span>
         <span className="searchBarDiv">
-          <img src="http://imgur.com/npblqeD.png" className="magnifyImg"/>
+          <img src="http://imgur.com/npblqeD.png" className="magnifyImg" />
           <input
             className="searchBar"
             type="search"
@@ -73,9 +79,9 @@ export default class Search extends React.Component {
             onChange={this.searchQuery}
             value={this.state.query}
             onKeyPress={this.handleKeyPress}
-          ></input>
+          />
         </span>
       </div>
-    )
+    );
   }
 }
