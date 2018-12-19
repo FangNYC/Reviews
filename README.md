@@ -206,5 +206,5 @@ id: integer
 ## Data Schema
 
 <p align="center">
-  <img src="https://github.com/FangNYC/Reviews/blob/master/dataSchema.png" width="700" id="image">
+  <img src="https://github.com/FangNYC/Reviews/blob/master/dataSchemaDesign.png" width="700" id="image">
 </p>
