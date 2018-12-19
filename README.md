@@ -2,7 +2,9 @@
 
 The Reviews module displays reviews and ratings for a specific accommodation listing. Below is a preview of the deployed service.
 
-![](https://github.com/FangNYC/Reviews/blob/master/reviews.gif)
+<p align="center">
+  <img src="https://github.com/FangNYC/Reviews/blob/master/reviews.gif" >
+</p>
 
 ## Related Projects
 
@@ -203,4 +205,6 @@ id: integer
 
 ## Data Schema
 
-![](https://github.com/FangNYC/Reviews/blob/master/dataSchema.png)
+<p align="center">
+  <img src="https://github.com/FangNYC/Reviews/blob/master/dataSchemaDesign.png" width="700" id="image">
+</p>
